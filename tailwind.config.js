@@ -4,5 +4,10 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.js'
-  ]
-}
+  ],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes:["light", "dark", "cupcake"],
+      },
+    darkTheme: false, // ダークモードをONにする場合は削除
+  }

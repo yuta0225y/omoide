@@ -1,0 +1,7 @@
+<html "data-theme"="cupcake"></%html>
+
+<h1>あなたの存在しない記憶</h1>
+<p><%= @memory %></p>
+<%= link_to '別の記憶を生成', root_path %>
+<% share_text = "#{@memory} #存在しない記憶" %>
+<a href="https://twitter.com/intent/tweet?text=<%= CGI.escape(share_text) %>" target="_blank">Xでシェアする</a>
