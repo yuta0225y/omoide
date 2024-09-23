@@ -1,0 +1,7 @@
+<html data-theme="cupcake">
+  <h1>シチュエーションを選択してください</h1>
+  <%= form_with url: memories_show_path, method: :get, local: true do %>
+    <%= select_tag :situation, options_for_select(@situations.map { |display, key| [display, key] }) %>
+    <%= submit_tag '記憶を生成' %>
+  <% end %>
+</html>
