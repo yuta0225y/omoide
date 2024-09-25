@@ -1,17 +1,18 @@
 class MemoriesController < ApplicationController
   def new
     @situations = {
-      '海辺' => 'seaside',
-      '高校時代' => 'high_school',
-      '修学旅行' => 'school_trip'
+      'カリキュラム' => 'curriculum',
+      'mattermost' => 'mattermost',
+      'アプリ開発' => 'app_development',
+      '転職活動' => 'job_hunt'
     }
   end
   
   def show
     situation_key = params[:situation]
-    memories = load_memories[situation_key]
-    @memory = memories.sample
-  end
+    memories = load_memories["memories"][situation_key] || []
+    @memory = memories.sample || "記憶が見つかりませんでした"
+  end  
   
 
   private
