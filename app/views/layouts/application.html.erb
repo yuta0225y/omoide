@@ -1,40 +1,38 @@
 <!DOCTYPE html>
-<html data-theme="dark">
-  <head>
-    <title><%= content_for(:title) || "Myapp" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <!-- OGP & Twitter Card Meta Tags -->
-    <meta property="og:title" content="<%= content_for?(:og_title) ? yield(:og_title) : 'Myapp' %>">
-    <meta property="og:description" content="<%= content_for?(:og_description) ? yield(:og_description) : '存在しない記憶を共有しよう！' %>">
-    <meta property="og:image" content="<%= content_for?(:og_image) ? yield(:og_image) : image_url('ogp.png') %>">
-    <meta property="og:url" content="<%= request.original_url %>">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="ja_JP">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<%= content_for?(:twitter_title) ? yield(:twitter_title) : 'Myapp' %>">
-    <meta name="twitter:description" content="<%= content_for?(:twitter_description) ? yield(:twitter_description) : '存在しない記憶を共有しよう！' %>">
-    <meta name="twitter:image" content="<%= content_for?(:twitter_image) ? yield(:twitter_image) : image_url('ogp.png') %>">
-    <meta name="twitter:site" content="@your_twitter_handle">
-
-    <!-- Link to manifest and icons -->
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-  </head>
-
-  <body>
-    <%= yield %>
-    <%= render "share/footer" %>
-  </body>
+<html data-theme="dark" class="min-h-screen flex items-center justify-center bg-gray-900">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="<%= @memory_title %>">
+  <meta property="og:description" content="<%= @memory %>">
+  <meta property="og:image" content="<%= image_url('ogp_image.jpg') %>">
+  <meta property="og:url" content="<%= request.original_url %>">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= @memory_title %>">
+  <meta name="twitter:description" content="<%= @memory %>">
+  <meta name="twitter:image" content="<%= image_url('ogp_image.jpg') %>">
+  <meta name="twitter:site" content="@your_twitter_handle">
+  <title><%= @memory_title %></title>
+</head>
+<body>
+  <div class="w-full max-w-lg bg-gray-800 p-10 rounded-lg shadow-lg">
+    <h1 class="text-center mb-6 text-purple-500 text-4xl font-bold">
+      <%= @memory_title %>
+    </h1>
+    <p class="text-center mb-8 text-gray-200">
+      <%= @memory %>
+    </p>
+    <div class="flex justify-center mb-6">
+      <%= link_to '別の記憶を思い出す', root_path, class: "btn btn-primary bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300" %>
+    </div>
+    <% share_text = "#{@memory_title}: #{@memory} #存在しない記憶" %>
+    <div class="flex justify-center">
+      <a href="https://twitter.com/intent/tweet?text=<%= CGI.escape(share_text) %>" target="_blank" class="btn btn-secondary bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+        Xでシェアする
+      </a>
+    </div>
+  </div>
+</body>
 </html>
-
